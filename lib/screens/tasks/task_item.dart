@@ -7,6 +7,8 @@ import '../../provider/app_config_provider.dart';
 import '../../styles/color.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
+
+
 class TaskItem extends StatefulWidget {
   const TaskItem({super.key});
 
@@ -27,12 +29,12 @@ class _TaskItemState extends State<TaskItem> {
           child: Card(
             color: provider.appTheme == ThemeMode.light
                 ? WhiteColor
-                : BackgroundDark,
+                : blackColor,
             elevation: 12,
             margin: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
             shape: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(15),
-                borderSide: BorderSide(color: Colors.transparent)),
+                borderSide: BorderSide(color: primaryColor)),
             child: Slidable(
               startActionPane: ActionPane(
                 extentRatio: 0.25,
@@ -54,7 +56,7 @@ class _TaskItemState extends State<TaskItem> {
                   flex: 2,
 
                   onPressed: (context) {
-                    Navigator.pushNamed(context, Edit.raouteName);
+                    Navigator.pushNamed(context, Edit.routeName);
                   },
                   backgroundColor: GreenColor,
                   foregroundColor: WhiteColor,

@@ -1,7 +1,9 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import 'package:todo/models/task_model.dart';
+import 'package:todo/shared/network/firebase/firebase_manager.dart';
 
 import '../../provider/app_config_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -18,7 +20,8 @@ class _BottomSheetAddTaskState extends State<BottomSheetAddTask> {
 
   var descriptionController = TextEditingController();
   var selectedDate = DateTime.now();
-var formkey=GlobalKey<FormState>();
+  var formkey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     var provider = Provider.of<AppConfigProvider>(context);
@@ -32,48 +35,58 @@ var formkey=GlobalKey<FormState>();
             child: Text(
                 textAlign: TextAlign.center,
                 AppLocalizations.of(context)!.addNewTask,
-                style: Theme.of(context)
+                style: Theme
+                    .of(context)
                     .textTheme
                     .bodyMedium!
                     .copyWith(color: blackColor)),
           ),
-         Form(key:formkey ,
-           child: Column(children: [ Padding(
-             padding: const EdgeInsets.all(20.0),
-             child: TextFormField(
-                 validator: (text) {
-                   if(text==null || text.isEmpty){
-                     return "please enter task name";
-                   }
-                   return null;
-                 },
-                 controller: titleController,
-                 textAlign: provider.appLanguage == "en"?TextAlign.start:TextAlign.end,
-                 decoration: InputDecoration(
+          Form(key: formkey,
+            child: Column(children: [ Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: TextFormField(
+                  validator: (text) {
+                    if (text == null || text.isEmpty) {
+                      return "please enter task name";
+                    }
+                    return null;
+                  },
+                  controller: titleController,
+                  textAlign: provider.appLanguage == "en"
+                      ? TextAlign.start
+                      : TextAlign.end,
+                  decoration: InputDecoration(
 
-                   hintText: "enter your task",
-                 )),
-           ),
-             Padding(
-               padding: const EdgeInsets.only(left: 20.0),
-               child: TextFormField(
-                   validator: (text) {
-                     if(text==null || text.isEmpty){
-                       return "please enter task description";
-                     }
-                     return null;
-                   },
-                   controller: descriptionController,
-                   textAlign:provider.appLanguage == "en"?TextAlign.start:TextAlign.end,
-                   decoration:
-                   InputDecoration(hintText: "enter your description"),maxLines: 4),
-             ),],),
-         ),
+                    hintText: "Enter your Task Name",
+                  )),
+            ),
+              Padding(
+                padding: const EdgeInsets.only(left: 20.0),
+                child: TextFormField(
+                    validator: (text) {
+                      if (text == null || text.isEmpty) {
+                        return "please enter task description";
+                      }
+                      return null;
+                    },
+                    controller: descriptionController,
+                    textAlign: provider.appLanguage == "en"
+                        ? TextAlign.start
+                        : TextAlign.end,
+                    decoration:
+                    InputDecoration(hintText: "Enter your Description"),
+                    ),
+              ),
+            ],),
+          ),
           Padding(
             padding: const EdgeInsets.only(left: 20.0, top: 5),
             child: Text("Select Time",
-                textAlign: provider.appLanguage == "en"?TextAlign.start:TextAlign.end,
-                style: Theme.of(context)
+                textAlign: provider.appLanguage == "en"
+                    ? TextAlign.start
+                    : TextAlign.end,
+                style: Theme
+                    .of(context)
                     .textTheme
                     .bodyMedium!
                     .copyWith(color: blackColor)),
@@ -88,7 +101,8 @@ var formkey=GlobalKey<FormState>();
             child: Text(
                 textAlign: TextAlign.center,
                 selectedDate.toString().substring(0, 10),
-                style: Theme.of(context)
+                style: Theme
+                    .of(context)
                     .textTheme
                     .bodyMedium!
                     .copyWith(fontSize: 16, color: primaryColor)),
@@ -98,7 +112,10 @@ var formkey=GlobalKey<FormState>();
           ),
           ElevatedButton(onPressed: () {
             addTask();
-
+            TaskModel task = TaskModel(title: titleController.text,
+                description: descriptionController.text,
+                date: selectedDate.millisecondsSinceEpoch);
+            FirebaseManager.addTask(task);
           }, child: Text("Add Task"))
         ]);
   }
@@ -117,13 +134,9 @@ var formkey=GlobalKey<FormState>();
   }
 
   void addTask() {
-if(formkey.currentState?.validate()==true){
+    if (formkey.currentState?.validate() == true) {
 
 
-
-
-}
-
-
+    }
   }
 }

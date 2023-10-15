@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -5,10 +6,15 @@ import 'package:provider/provider.dart';
 import 'package:todo/provider/app_config_provider.dart';
 import 'package:todo/screens/tasks/edit.dart';
 import 'package:todo/styles/theme.dart';
-
+// import 'package:cloud_firestore/cloud_firestore.dart';
+import 'firebase_options.dart';
 import 'layout/home_layout.dart';
 
-void main() {
+void main()async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(ChangeNotifierProvider(create: (BuildContext context) => AppConfigProvider(),
       child: MyApp()));
 }
@@ -21,7 +27,7 @@ class MyApp extends StatelessWidget {
       initialRoute: HomeLayout.routeName,
       routes: {
         HomeLayout.routeName: (context) => HomeLayout(),
-Edit.raouteName:(context) => Edit(),
+Edit.routeName:(context) => Edit(),
 
       },
       localizationsDelegates: AppLocalizations.localizationsDelegates,

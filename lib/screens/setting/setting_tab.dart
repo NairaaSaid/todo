@@ -22,7 +22,10 @@ class _SettingTabState extends State<SettingTab> {
   @override
   Widget build(BuildContext context) {
     var provider = Provider.of<AppConfigProvider>(context);
-    return Padding(
+    return Scaffold(backgroundColor:provider.appTheme==ThemeMode.light? BackgroundLight:BackgroundDark,appBar: AppBar(        backgroundColor: primaryColor,
+        title: Text( AppLocalizations.of(context)!.setting,
+      style: Theme.of(context).textTheme.bodyLarge,)),
+    body: Padding(
       padding: const EdgeInsets.all(10.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -30,9 +33,9 @@ class _SettingTabState extends State<SettingTab> {
           Text(AppLocalizations.of(context)!.language,
               style: provider.appTheme == ThemeMode.light
                   ? Theme.of(context)
-                      .textTheme
-                      .bodyMedium!
-                      .copyWith(color: blackColor)
+                  .textTheme
+                  .bodyMedium!
+                  .copyWith(color: blackColor)
                   : Theme.of(context).textTheme.bodyMedium),
           SizedBox(
             height: 5,
@@ -71,9 +74,9 @@ class _SettingTabState extends State<SettingTab> {
           Text(AppLocalizations.of(context)!.theme,
               style: provider.appTheme == ThemeMode.light
                   ? Theme.of(context)
-                      .textTheme
-                      .bodyMedium!
-                      .copyWith(color: blackColor)
+                  .textTheme
+                  .bodyMedium!
+                  .copyWith(color: blackColor)
                   : Theme.of(context).textTheme.bodyMedium),
           SizedBox(
             height: 5,
@@ -108,7 +111,7 @@ class _SettingTabState extends State<SettingTab> {
           ),
         ],
       ),
-    );
+    ),);
   }
 
   void showLanguageBottomSheet(BuildContext context) {

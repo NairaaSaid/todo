@@ -30,11 +30,11 @@ class _HomeLayoutState extends State<HomeLayout> {
       backgroundColor:provider.appTheme==ThemeMode.light? BackgroundLight:BackgroundDark,
 
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      appBar: AppBar(
+      /*appBar: AppBar(
           title: Text(
             AppLocalizations.of(context)!.app_title,
             style: Theme.of(context).textTheme.bodyLarge,
-          )),
+          )),*/
       floatingActionButton: FloatingActionButton(
           shape: RoundedRectangleBorder(
               side: BorderSide(

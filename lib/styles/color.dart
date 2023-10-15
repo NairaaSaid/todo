@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 Color primaryColor = Color(0xFF5D9CEC);
-Color blackColor = Color(0xFF383838);
+Color blackColor = Color(0xFF141922);
 Color WhiteColor = Color(0xFFFFFFFF);
 Color BackgroundLight = Color(0xFFDFECDB);
 Color BackgroundDark = Color(0xFF060E1E);
