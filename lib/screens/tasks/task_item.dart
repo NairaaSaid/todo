@@ -34,7 +34,7 @@ class _TaskItemState extends State<TaskItem> {
             margin: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
             shape: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(15),
-                borderSide: BorderSide(color: primaryColor)),
+                borderSide: BorderSide(color: primaryColor,width: 2)),
             child: Slidable(
               startActionPane: ActionPane(
                 extentRatio: 0.25,

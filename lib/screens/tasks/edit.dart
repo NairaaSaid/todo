@@ -30,16 +30,24 @@ class _EditState extends State<Edit> {
             AppLocalizations.of(context)!.app_title,
             style: Theme.of(context).textTheme.bodyLarge,
           )),
-      body: Container(height: 600,
+      body: Container(
+
+        height: 500,
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Card(
+            //color: provider.appTheme==ThemeMode.light? WhiteColor:BackgroundDark,
+            elevation: 12,
+            margin: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+            shape: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(15),
+                borderSide: BorderSide(color: primaryColor,width: 2)),
             child: Column(
                // mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(top: 10.0),
+                    padding: const EdgeInsets.only(top: 2.0),
                     child: Text(
                         textAlign: TextAlign.center,
                         AppLocalizations.of(context)!.edittask,
@@ -51,7 +59,7 @@ class _EditState extends State<Edit> {
                   ),
                   Form(key: formkey,
                     child: Column(children: [ Padding(
-                      padding: const EdgeInsets.all(20.0),
+                      padding: const EdgeInsets.only(left: 20.0,right: 20),
                       child: TextFormField(
                           validator: (text) {
                             if (text == null || text.isEmpty) {
@@ -68,8 +76,7 @@ class _EditState extends State<Edit> {
                             hintText: "This is Title Task",
                           )),
                     ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 20.0),
+                      Padding(                        padding: const EdgeInsets.only(left: 20.0,right: 20),
                         child: TextFormField(
                           validator: (text) {
                             if (text == null || text.isEmpty) {
@@ -88,7 +95,7 @@ class _EditState extends State<Edit> {
                     ],),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 20.0, top: 5),
+                    padding: const EdgeInsets.only(left: 20.0),
                     child: Text("Select Time",
                         textAlign: provider.appLanguage == "en"
                             ? TextAlign.start
@@ -100,7 +107,7 @@ class _EditState extends State<Edit> {
                             .copyWith(color: blackColor)),
                   ),
                   SizedBox(
-                    height: 5,
+                    height: 1,
                   ),
                   InkWell(
                     onTap: () {
@@ -116,7 +123,7 @@ class _EditState extends State<Edit> {
                             .copyWith(fontSize: 16, color: primaryColor)),
                   ),
                   SizedBox(
-                    height: 18,
+                    height: 5,
                   ),
                   ElevatedButton(onPressed: () {
                     editTask();
