@@ -35,34 +35,35 @@ class _BottomSheetAddTaskState extends State<BottomSheetAddTask> {
             child: Text(
                 textAlign: TextAlign.center,
                 AppLocalizations.of(context)!.addNewTask,
-                style: Theme
-                    .of(context)
+                style: Theme.of(context)
                     .textTheme
                     .bodyMedium!
                     .copyWith(color: blackColor)),
           ),
-          Form(key: formkey,
-            child: Column(children: [ Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: TextFormField(
-                  validator: (text) {
-                    if (text == null || text.isEmpty) {
-                      return "please enter task name";
-                    }
-                    return null;
-                  },
-                  controller: titleController,
-                  textAlign: provider.appLanguage == "en"
-                      ? TextAlign.start
-                      : TextAlign.end,
-                  decoration: InputDecoration(
-
-                    hintText: "Enter your Task Name",
-                  )),
-            ),
-              Padding(
-                padding: const EdgeInsets.only(left: 20.0),
-                child: TextFormField(
+          Form(
+            key: formkey,
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: TextFormField(
+                      validator: (text) {
+                        if (text == null || text.isEmpty) {
+                          return "please enter task name";
+                        }
+                        return null;
+                      },
+                      controller: titleController,
+                      textAlign: provider.appLanguage == "en"
+                          ? TextAlign.start
+                          : TextAlign.end,
+                      decoration: InputDecoration(
+                        hintText: "Enter your Task Name",
+                      )),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20.0),
+                  child: TextFormField(
                     validator: (text) {
                       if (text == null || text.isEmpty) {
                         return "please enter task description";
@@ -74,10 +75,11 @@ class _BottomSheetAddTaskState extends State<BottomSheetAddTask> {
                         ? TextAlign.start
                         : TextAlign.end,
                     decoration:
-                    InputDecoration(hintText: "Enter your Description"),
-                    ),
-              ),
-            ],),
+                        InputDecoration(hintText: "Enter your Description"),
+                  ),
+                ),
+              ],
+            ),
           ),
           Padding(
             padding: const EdgeInsets.only(left: 20.0, top: 5),
@@ -85,8 +87,7 @@ class _BottomSheetAddTaskState extends State<BottomSheetAddTask> {
                 textAlign: provider.appLanguage == "en"
                     ? TextAlign.start
                     : TextAlign.end,
-                style: Theme
-                    .of(context)
+                style: Theme.of(context)
                     .textTheme
                     .bodyMedium!
                     .copyWith(color: blackColor)),
@@ -101,8 +102,7 @@ class _BottomSheetAddTaskState extends State<BottomSheetAddTask> {
             child: Text(
                 textAlign: TextAlign.center,
                 selectedDate.toString().substring(0, 10),
-                style: Theme
-                    .of(context)
+                style: Theme.of(context)
                     .textTheme
                     .bodyMedium!
                     .copyWith(fontSize: 16, color: primaryColor)),
@@ -110,13 +110,36 @@ class _BottomSheetAddTaskState extends State<BottomSheetAddTask> {
           SizedBox(
             height: 18,
           ),
-          ElevatedButton(onPressed: () {
-            addTask();
-            TaskModel task = TaskModel(title: titleController.text,
-                description: descriptionController.text,
-                date: selectedDate.millisecondsSinceEpoch);
-            FirebaseManager.addTask(task);
-          }, child: Text("Add Task"))
+          ElevatedButton(
+              onPressed: () {
+                //print(selectedDate);
+                addTask();
+                TaskModel task = TaskModel(
+                    title: titleController.text,
+                    description: descriptionController.text,
+                    date: DateUtils.dateOnly(selectedDate)
+                        .millisecondsSinceEpoch);
+                FirebaseManager.addTask(task);
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: Text("Successfully"),
+                        content: Text("Tasks Added to Firebase"),
+                        actions: [
+                          ElevatedButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                                Navigator.pop(context);
+                              },
+                              child: Text("OK"))
+                        ],
+                      );
+                    }
+                    );
+
+              },
+              child: Text("Add Task"))
         ]);
   }
 
@@ -134,9 +157,6 @@ class _BottomSheetAddTaskState extends State<BottomSheetAddTask> {
   }
 
   void addTask() {
-    if (formkey.currentState?.validate() == true) {
-
-
-    }
+    if (formkey.currentState?.validate() == true) {}
   }
 }
