@@ -5,9 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:todo/provider/app_config_provider.dart';
+
+import 'package:todo/screens/registration/registration.dart';
 import 'package:todo/screens/tasks/edit.dart';
 import 'package:todo/styles/theme.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 import 'firebase_options.dart';
 import 'layout/home_layout.dart';
 
@@ -26,10 +30,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     var provider=Provider.of<AppConfigProvider>(context);
     return MaterialApp(
-      initialRoute: HomeLayout.routeName,
+      initialRoute: Registration.routeName,
       routes: {
         HomeLayout.routeName: (context) => HomeLayout(),
 Edit.routeName:(context) => Edit(),
+        Registration.routeName:(context) => Registration(),
 
       },
       localizationsDelegates: AppLocalizations.localizationsDelegates,
