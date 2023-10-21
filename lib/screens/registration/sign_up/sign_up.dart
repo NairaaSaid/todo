@@ -11,7 +11,7 @@ class SignUpScreen extends StatelessWidget {
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(15.0),
           child: Form(
             key: formkey,
             child: Column(
@@ -28,6 +28,8 @@ class SignUpScreen extends StatelessWidget {
                   },
                 ),
                 TextFormField(
+                  keyboardType: TextInputType.emailAddress,
+
                   controller: emailConttrolar,
                   decoration: const InputDecoration(labelText: 'Email'),
                   validator: (value) {
@@ -49,6 +51,7 @@ class SignUpScreen extends StatelessWidget {
                 ),
                 TextFormField(
                   controller: confirmPasswordConttrolar,
+                  keyboardType: TextInputType.emailAddress,
                   obscureText: true,
                   decoration:
                       const InputDecoration(labelText: 'Confirm Password'),
@@ -64,7 +67,7 @@ class SignUpScreen extends StatelessWidget {
                     return null;
                   },
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
                     if (formkey.currentState!.validate()) {

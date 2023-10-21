@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     var provider=Provider.of<AppConfigProvider>(context);
     return MaterialApp(
-      initialRoute: Registration.routeName,
+      initialRoute: HomeLayout.routeName,
       routes: {
         HomeLayout.routeName: (context) => HomeLayout(),
 Edit.routeName:(context) => Edit(),
